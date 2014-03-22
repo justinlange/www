@@ -19,6 +19,8 @@ var app = {
     bindEvents: function() {
         document.addEventListener('deviceready', this.onDeviceReady, false);
         document.addEventListener('click', this.resetScreen, false);
+        document.addEventListener('waterButton', app.turnOffWater, false);
+
     },
 
 /*
@@ -56,6 +58,10 @@ var app = {
         var watchAccel = navigator.accelerometer.watchAcceleration(success, failure, {
             frequency: 100
         });
+    },
+
+    turnOffWater: function() {
+        buttonDiv.innerHTML = "attempting to turn off water...";
     },
     
     // reset the messageDiv to the center of the screen:
