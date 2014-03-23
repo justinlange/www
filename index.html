@@ -2,43 +2,41 @@
 
 <html>
    <head>
-      <title>Accelerometer</title>
+      <title>Don't Tip the Boat</title>
       <link rel="stylesheet"  type="text/css" href="style.css">
    </head>
       <div class="app">
+
          <div id="messageDiv"><p> below is a button to turn off the water</p></div>
 
-<!--          <div id="buttonDiv"><button id="waterButton">turn off</button></div>   -->
 
          <button type="button" id="waterButton" onclick="sendData({test:'ok'})">Turn off water</button>
 
-         <div id="vizDic"><p> this is a vizualization of incoming values <p/>
+         <div id="vizDic"><p> this is a slider to reset tipping threshold values <p/>
          </div>
 
+         <input type="range" id="redSlider" min="0" max="100"  onchange="setAngle(this, r);">
+          <input type="text" id="r" size=2><br>
 
-         
 
 
-<!-- 
-          <form action="blah.php" method="post">
-          <input type="text" name="data" value="mydata" />
-          <input type="submit" />
-          </form>
-
-            <! directs browser to a different page -->
-        <!--   <form action="http://example.com/" method="POST">
-          <input type="hidden" name="q" value="a">
-          </form> --> 
 
       </div>
-      <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
      <script type="text/javascript" src="js/index.js"></script>
+     <script type="text/javascript" src="js/zepto.min.js"></script>
      <script type="text/javascript">
        app.initialize();
 
-      
+       function setAngle(ui, display) {
+          display.value= ui.value;
+          $.get("/arduino/"+ display.id + "/" + ui.value);
+        } 
 
      </script>
+
+
+
    </body>
 </html>
 

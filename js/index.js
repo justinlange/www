@@ -68,21 +68,12 @@ var app = {
         messageDiv.innerHTML = "attempting to turn off water...";
 
 
-        //ajax way to send data
-        xmlhttp.onreadystatechange=function() {
-      if (xmlhttp.readyState==4) {
-             alert(xmlhttp.readyState);
-             document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
-        }
-      },
-
-        xmlhttp.open("GET","ajax_info.txt",true);
-        xmlhttp.send();
+    
     },
 
 //a form way to send data with javascript
 
-    function sendData(data) {
+    sendData: function(data) {
           var XHR = new XMLHttpRequest();
           var urlEncodedData = "42";
 
