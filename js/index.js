@@ -17,9 +17,10 @@ var app = {
     bind any events that are required on startup to listeners:
 */
     bindEvents: function() {
+        //waterButton.addEventListener('touchend', this.turnOffWater, false);
+        waterButton.addEventListener('click', this.turnOffWater, false);
         document.addEventListener('deviceready', this.onDeviceReady, false);
         document.addEventListener('click', this.resetScreen, false);
-        document.addEventListener('waterButton', app.turnOffWater, false);
 
     },
 
@@ -29,6 +30,7 @@ var app = {
     onDeviceReady: function() {
         // start watching the accelerometer:
         app.watchAcceleration();
+        console.log("ondeviceread");
     },
 
     watchAcceleration: function() {
@@ -61,7 +63,9 @@ var app = {
     },
 
     turnOffWater: function() {
-        buttonDiv.innerHTML = "attempting to turn off water...";
+        console.log("turnoff water called");
+        //alert('function called');
+        messageDiv.innerHTML = "attempting to turn off water...";
     },
     
     // reset the messageDiv to the center of the screen:
