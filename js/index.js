@@ -66,7 +66,63 @@ var app = {
         console.log("turnoff water called");
         //alert('function called');
         messageDiv.innerHTML = "attempting to turn off water...";
+
+
+        //ajax way to send data
+        xmlhttp.onreadystatechange=function() {
+      if (xmlhttp.readyState==4) {
+             alert(xmlhttp.readyState);
+             document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
+        }
+      },
+
+        xmlhttp.open("GET","ajax_info.txt",true);
+        xmlhttp.send();
     },
+
+//a form way to send data with javascript
+
+    function sendData(data) {
+          var XHR = new XMLHttpRequest();
+          var urlEncodedData = "42";
+
+          // We turn the data object into a URL encoded string
+          for(name in data) {
+            urlEncodedData += name + "=" + data[name] + "&";
+          }
+
+         
+
+          // We URLEncode the string
+          urlEncodedData = encodeURIComponent(urlEncodedData);
+
+          // encodeURIComponent encode a little to much things
+          // to properly handle HTTP POST requests.
+          urlEncodedData = urlEncodedData.replace('%20','+').replace('%3D','=');
+
+          // We define what will happen if the data are successfully sent
+          XHR.addEventListener('load', function(event) {
+            alert('Yeah! Data sent and water is turning off.');
+          });
+
+          // We define what will happen in case of error
+          XHR.addEventListener('error', function(event) {
+            alert('Oups! Something went wrong.');
+          });
+
+          // We setup our request
+          XHR.open('POST', 'http://ucommbieber.unl.edu/CORS/cors.php');
+
+          // We add the required HTTP header to handle a form data POST request
+          XHR.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+          XHR.setRequestHeader('Content-Length', urlEncodedData.length);
+
+          // And finally, We send our data.
+          XHR.send(urlEncodedData);
+        },
+
+
+  
     
     // reset the messageDiv to the center of the screen:
     resetScreen: function() {
